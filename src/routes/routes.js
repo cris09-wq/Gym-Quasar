@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
-  // Ruta inicial: El Login (Aún no tienes el archivo, pero lo dejamos preparado)
   {
     path: '/',
     component: () => import('../layout/Mainlayout.vue') 

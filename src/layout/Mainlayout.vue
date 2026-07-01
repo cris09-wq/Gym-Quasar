@@ -41,22 +41,22 @@
       <q-list dark>
         <q-item-label header class=" text-warning text-bold">ÁREAS DE TRABAJO</q-item-label>
 
-      <q-item clickable to="/Gym/espalda" active-class="text-warning bg-grey-9">
+      <q-item clickable to="/gym/espalda" active-class="text-warning bg-grey-9">
         <q-item-section avatar><q-icon name="fitness_center" /></q-item-section>
         <q-item-section>Espalda</q-item-section>
       </q-item>
 
-      <q-item clickable to="/Gym/pecho" active-class="text-warning bg-grey-9">
+      <q-item clickable to="/gym/pecho" active-class="text-warning bg-grey-9">
         <q-item-section avatar><q-icon name="accessibility" /></q-item-section>
         <q-item-section>Pecho</q-item-section>
       </q-item>
 
-      <q-item clickable to="/Gym/brazo" active-class="text-warning bg-grey-9">
+      <q-item clickable to="/gym/brazo" active-class="text-warning bg-grey-9">
         <q-item-section avatar><q-icon name="fitness_center" /></q-item-section>
         <q-item-section>Brazo</q-item-section>
       </q-item>
 
-      <q-item clickable to="/Gym/pierna" active-class="text-warning bg-grey-9">
+      <q-item clickable to="/gym/pierna" active-class="text-warning bg-grey-9">
         <q-item-section avatar><q-icon name="directions_run" /></q-item-section>
         <q-item-section>Pierna</q-item-section>
       </q-item>
