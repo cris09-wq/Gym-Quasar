@@ -28,38 +28,35 @@
       </q-card-actions>
     </q-card>
   </div>
+
   <q-layout v-else view="lHh Lpr lFf" class="bg-grey-9 text-white">
     <q-header elevated class="bg-black text-warning">
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="leftDrawerOpen = !leftDrawerOpen" />
         <q-toolbar-title class="text-bold text-uppercase">Gym Zone Pro</q-toolbar-title>
-        <q-btn flat round icon="logout" @click="ingresado = false" />
+        <q-btn flat round icon="logout" @click="cerrarSesion" />
       </q-toolbar>
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" overlay behavior="mobile" bordered class="bg-grey-10 text-white">
       <q-list dark>
-        <q-item-label header class=" text-warning text-bold">ÁREAS DE TRABAJO</q-item-label>
-
-      <q-item clickable to="/gym/espalda" active-class="text-warning bg-grey-9">
-        <q-item-section avatar><q-icon name="fitness_center" /></q-item-section>
-        <q-item-section>Espalda</q-item-section>
-      </q-item>
-
-      <q-item clickable to="/gym/pecho" active-class="text-warning bg-grey-9">
-        <q-item-section avatar><q-icon name="accessibility" /></q-item-section>
-        <q-item-section>Pecho</q-item-section>
-      </q-item>
-
-      <q-item clickable to="/gym/brazo" active-class="text-warning bg-grey-9">
-        <q-item-section avatar><q-icon name="fitness_center" /></q-item-section>
-        <q-item-section>Brazo</q-item-section>
-      </q-item>
-
-      <q-item clickable to="/gym/pierna" active-class="text-warning bg-grey-9">
-        <q-item-section avatar><q-icon name="directions_run" /></q-item-section>
-        <q-item-section>Pierna</q-item-section>
-      </q-item>
+        <q-item-label header class="text-warning text-bold">ÁREAS DE TRABAJO</q-item-label>
+        <q-item clickable to="/gym/espalda" active-class="text-warning bg-grey-9">
+          <q-item-section avatar><q-icon name="fitness_center" /></q-item-section>
+          <q-item-section>Espalda</q-item-section>
+        </q-item>
+        <q-item clickable to="/gym/pecho" active-class="text-warning bg-grey-9">
+          <q-item-section avatar><q-icon name="accessibility" /></q-item-section>
+          <q-item-section>Pecho</q-item-section>
+        </q-item>
+        <q-item clickable to="/gym/brazo" active-class="text-warning bg-grey-9">
+          <q-item-section avatar><q-icon name="fitness_center" /></q-item-section>
+          <q-item-section>Brazo</q-item-section>
+        </q-item>
+        <q-item clickable to="/gym/pierna" active-class="text-warning bg-grey-9">
+          <q-item-section avatar><q-icon name="directions_run" /></q-item-section>
+          <q-item-section>Pierna</q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -68,46 +65,27 @@
         <div class="text-center full-width" style="max-width: 800px;">
           <h4 class="text-warning text-bold q-mb-md text-uppercase">¡Bienvenido a tu entrenamiento!</h4>
           <q-img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop"
-            style="border-radius: 20px; border: 2px solid #ffde43; " class="shadow-15">
+            style="border-radius: 20px; border: 2px solid #ffde43;" class="shadow-15">
             <div class="absolute-bottom text-subtitle1 text-center bg-transparent">
               Selecciona un área de trabajo en el menú izquierdo para comenzar
             </div>
           </q-img>
         </div>
       </q-page>
-
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
-const ingresado = ref(false)
+const ingresado = ref(localStorage.getItem('sesionGym') === 'activa')
+
 const leftDrawerOpen = ref(false)
 const usuario = ref('')
 const contrasena = ref('')
 const mensajeError = ref('')
-const ingresado = ref(false)
-
-onMounted(() => {
-  const sesionGuardada = localStorage.getItem('sesion')
-  if (sesionGuardada === 'activa') {
-    ingresado.value = true
-  }
-})
-
-const handleLogin = () => {
-  localStorage.setItem('sesionGym', 'activa')
-  ingresado.value = true
-}
-
-const cerrarSesion = () => {
-  localStorage.removeItem('sesionGym')
-  ingresado.value = false
-  window.location.reload()
-}
 
 function iniciarSesion() {
   if (!usuario.value || !contrasena.value) {
@@ -125,8 +103,15 @@ function iniciarSesion() {
     return
   }
 
+  localStorage.setItem('sesionGym', 'activa')
   mensajeError.value = ''
   ingresado.value = true
+}
+
+function cerrarSesion() {
+  localStorage.removeItem('sesionGym')
+  ingresado.value = false
+  window.location.reload()
 }
 </script>
 
