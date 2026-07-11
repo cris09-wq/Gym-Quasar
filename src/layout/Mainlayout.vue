@@ -82,13 +82,32 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const ingresado = ref(false)
 const leftDrawerOpen = ref(false)
 const usuario = ref('')
 const contrasena = ref('')
 const mensajeError = ref('')
+const ingresado = ref(false)
+
+onMounted(() => {
+  const sesionGuardada = localStorage.getItem('sesion')
+  if (sesionGuardada === 'activa') {
+    ingresado.value = true
+  }
+})
+
+const handleLogin = () => {
+  localStorage.setItem('sesionGym', 'activa')
+  ingresado.value = true
+}
+
+const cerrarSesion = () => {
+  localStorage.removeItem('sesionGym')
+  ingresado.value = false
+  window.location.reload()
+}
 
 function iniciarSesion() {
   if (!usuario.value || !contrasena.value) {
